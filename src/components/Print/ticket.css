@@ -1,0 +1,24 @@
+@media print {
+    body {
+        margin: 0;
+        font-family: monospace;
+        font-size: 12px;
+        width: 58mm;
+    }
+    .ticket {
+        width: 100%;
+        text-align: center;
+    }
+    .ticket table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .ticket td {
+        padding: 2px 0;
+    }
+    .totals {
+        margin-top: 10px;
+        border-top: 1px dashed #000;
+        padding-top: 5px;
+    }
+}
