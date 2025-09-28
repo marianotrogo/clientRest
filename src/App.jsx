@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Provider, useDispatch, useSelector } from 'react-redux'
 import { store } from './store.js'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import Loader from './components/Loader.jsx'
+import GlobalLoader from './components/GlobalLoader.jsx'
+import {showLoader, hideLoader} from './store/loaderSlice.js'
 import Login from './pages/Login.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Orders from './pages/Orders.jsx'
@@ -89,10 +91,20 @@ function Nav() {
 }
 
 function AppContent() {
+  const dispatch = useDispatch()
   const loading = useSelector(s => s.auth.loading)
+
+  useEffect(()=>{
+    dispatch(showLoader('Iniciando Servidor...'))
+    fetch(`${import.meta.env.VITE_API_URL || 'https://serverrest.onrender.com'}/api/healt`)
+   .then(()=> dispatch(hideLoader()))
+   .catch(()=> dispatch(hideLoader()))
+  },[dispatch])
+
 
   return (
     <>
+      <GlobalLoader/>
       {loading && <Loader />}
 
       <BrowserRouter>
