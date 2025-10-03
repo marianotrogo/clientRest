@@ -14,8 +14,9 @@ const Ticket = ({ orderData, onClose }) => {
             @media print {
               body {
                 margin: 0;
-                font-family: monospace;
-                font-size: 8px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 10px;
+                font-weight: bold;   
                 width: 58mm;          /* ✅ ancho ticket térmico */
               }
               .ticket {
@@ -30,7 +31,7 @@ const Ticket = ({ orderData, onClose }) => {
                 width: 100%;
                 border-collapse: collapse;
                 margin-top: 4px;
-                font-size: 8px;
+                font-size: 10px;
               }
               .ticket td {
                 padding: 1px 0;
@@ -38,10 +39,12 @@ const Ticket = ({ orderData, onClose }) => {
               .totals {
                 margin-top: 6px;
                 text-align: right;
+                font-weight: bold;
               }
               .totals h3 {
                 margin: 2px 0;
-                font-size: 12px;
+                font-size: 13px;
+                font-weight: bold;
               }
             }
           </style>
