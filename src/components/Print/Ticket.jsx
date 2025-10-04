@@ -94,7 +94,7 @@ const Ticket = ({ orderData, onClose }) => {
     <div className="p-4 border rounded bg-white shadow-md">
       <div ref={printRef}>
         <h2 style={{ margin: "0", fontWeight: "bold", fontSize: "12px" }}>PIPI CUCU</h2>
-        <p style={{ margin: "0", fontSize: "9px" }}>Rivadavia 156 -Lules </p>
+        <p style={{ margin: "0", fontSize: "9px" }}>Rivadavia 148 -Lules </p>
         <p style={{ margin: "0 0 6px", fontSize: "8px" }}>3872148812</p>
         <div className="line"></div>
 
