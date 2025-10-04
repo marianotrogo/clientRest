@@ -7,53 +7,84 @@ const Ticket = ({ orderData, onClose }) => {
     const printContent = printRef.current.innerHTML;
     const printWindow = window.open("", "", "width=300,height=400");
     printWindow.document.write(`
-      <html>
-        <head>
-          <title>Ticket</title>
-          <style>
-            @media print {
-              body {
-                margin: 0;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 10px;
-                font-weight: bold;   
-                width: 58mm;          /* ✅ ancho ticket térmico */
-              }
-              .ticket {
-                width: 100%;
-                text-align: center;
-              }
-              .line {
-                border-top: 1px dashed #000;
-                margin: 4px 0;
-              }
-              .ticket table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 4px;
-                font-size: 10px;
-              }
-              .ticket td {
-                padding: 1px 0;
-              }
-              .totals {
-                margin-top: 6px;
-                text-align: right;
-                font-weight: bold;
-              }
-              .totals h3 {
-                margin: 2px 0;
-                font-size: 13px;
-                font-weight: bold;
-              }
-            }
-          </style>
-        </head>
-        <body onload="window.print(); window.close();"> 
-          <div class="ticket">${printContent}</div>
-        </body>
-      </html>
-    `);
+  <html>
+    <head>
+      <title>Ticket</title>
+      <style>
+        @page {
+          size: 58mm auto;    /* ✅ ancho exacto del papel */
+          margin: 0;          /* ✅ sin márgenes extras */
+        }
+
+        @media print {
+          html, body {
+            width: 58mm;
+            margin: 0;
+            padding: 0;
+            font-family: "Arial", sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.2;
+            background: white;
+          }
+
+          .ticket {
+            width: 100%;
+            text-align: center;
+          }
+
+          .line {
+            border-top: 1px dashed #000;
+            margin: 6px 0;
+          }
+
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+            font-size: 12px;
+          }
+
+          td {
+            padding: 2px 0;
+          }
+
+          .totals {
+            margin-top: 8px;
+            text-align: right;
+          }
+
+          .totals h3 {
+            margin: 4px 0;
+            font-size: 15px;
+          }
+
+          p, h2 {
+            margin: 2px 0;
+          }
+
+          /* ✅ Esta parte es clave: evita que el navegador siga imprimiendo */
+          body::after {
+            content: "";
+            display: block;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            page-break-after: avoid; /* evita página extra */
+          }
+
+          /* ✅ Fuerza a que el corte sea exacto al final del contenido */
+          .ticket {
+            page-break-after: avoid;
+          }
+        }
+      </style>
+    </head>
+    <body onload="window.print(); window.close();">
+      <div class="ticket">${printContent}</div>
+    </body>
+  </html>
+`);
     printWindow.document.close();
   };
 
