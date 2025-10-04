@@ -62,21 +62,6 @@ const Ticket = ({ orderData, onClose }) => {
           p, h2 {
             margin: 2px 0;
           }
-
-          /* ✅ Esta parte es clave: evita que el navegador siga imprimiendo */
-          body::after {
-            content: "";
-            display: block;
-            height: 0;
-            margin: 0;
-            padding: 0;
-            page-break-after: avoid; /* evita página extra */
-          }
-
-          /* ✅ Fuerza a que el corte sea exacto al final del contenido */
-          .ticket {
-            page-break-after: avoid;
-          }
         }
       </style>
     </head>
